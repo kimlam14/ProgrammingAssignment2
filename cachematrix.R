@@ -15,10 +15,12 @@
 
 makeCacheMatrix <- function(x = matrix()) {
     inversedMatrix <- NULL
+    
     setMatrix <- function (mat) {
         srcMatrix <<- mat
         inversedMatrix <<- NULL
     }
+    
     getMatrix <- function () {
         x # which is the original matrix
     }
@@ -26,9 +28,11 @@ makeCacheMatrix <- function(x = matrix()) {
     setInverseMatrix <- function (invMat) {
         inversedMatrix <<- invMat
     }
+    
     getInverseMatrix <- function () {
         inversedMatrix
     }
+    
     list (setMatrix = setMatrix,
           getMatrix = getMatrix,
           setInverseMatrix = setInverseMatrix,
@@ -50,6 +54,7 @@ cacheSolve <- function(x, ...) {
     if (!is.null(invMatrix)) {
         return (invMatrix)
     } else {
+        ## get the source matrix, calculate inverse, store and return
         srcMatrix <- x$getMatrix()
         calcInverseMatrix <- solve(srcMatrix)
         x$setInverseMatrix(calcInverseMatrix)
